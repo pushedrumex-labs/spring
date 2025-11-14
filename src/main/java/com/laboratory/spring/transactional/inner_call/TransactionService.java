@@ -2,6 +2,7 @@ package com.laboratory.spring.transactional.inner_call;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +14,19 @@ public class TransactionService {
     @Autowired
     InnerTransactionService innerTransactionService;
 
+    @Lazy
+    @Autowired
+    TransactionService transactionService;
+
     @Transactional
     public void outerTransaction() {
         log.info("TransactionService.outerTransaction");
+    }
+
+    @Transactional
+    public void outerTransactionWithSelfInject() {
+        log.info("TransactionService.outerTransactionWithSelfInject");
+        transactionService.innerTransaction();
     }
 
     @Transactional

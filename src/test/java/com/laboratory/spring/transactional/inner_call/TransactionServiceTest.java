@@ -20,4 +20,9 @@ class TransactionServiceTest {
         transactionService.outerTransactionWithInnerTransaction();
     }
 
+    @Test
+    void callOuterTransactionWithSelfInject() {
+        transactionService.outerTransactionWithSelfInject();
+    }
+
 }
